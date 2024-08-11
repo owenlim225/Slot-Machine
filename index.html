@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Sloty</title>
-    <link rel="stylesheet" href="./style.css">
-    <script src="./script.js" defer></script>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Sloty</title>
+        <link rel="stylesheet" href="./style.css">
+        <script src="./script.js" defer></script>
+    </head>
 
-<div id="container">
-    <div class="window-border">
-        <div class="window">
-            <div class="outer-spacer"></div>
-            <div class="outer-col">
-                <div class="col"></div>
+    <body onload="toggleAudio()">
+
+        <div id="container">
+            <div class="window-border">
+                <div class="window">
+                    <div class="outer-spacer"></div>
+                    <div class="outer-col">
+                        <div class="col"></div>
+                    </div>
+                    <div class="outer-spacer"></div>
+                    <div class="outer-col">
+                        <div class="col"></div>
+                    </div>
+                    <div class="outer-spacer"></div>
+                    <div class="outer-col">
+                        <div class="col"></div>
+                    </div>
+                    <div class="outer-spacer"></div>
+                </div>
             </div>
-            <div class="outer-spacer"></div>
-            <div class="outer-col">
-                <div class="col"></div>
+
+            <input type="button" id="startButton" onclick="spin(this)" class="start-button" value="Spin"/>
+            <div id="options">
+                <img src="res/icons/audioOn.png" id="audio" class="option" onclick="toggleAudio()" />
             </div>
-            <div class="outer-spacer"></div>
-            <div class="outer-col">
-                <div class="col"></div>
-            </div>
-            <div class="outer-spacer"></div>
         </div>
-    </div>
-
-    <input type="button" id="startButton" onclick="spin(this)" class="start-button" value="Spin"/>
-    <div id="options">
-        <img src="res/icons/audioOn.png" id="audio" class="option" onclick="toggleAudio()" />
-    </div>
-</div>
-
-</body>
+    </body>
 </html>

@@ -8,6 +8,8 @@ var coinSounds = Array(3).fill().map(() => new Audio("res/sounds/coin.mp3"));
 var winSound = new Audio("res/sounds/win.mp3");
 var loseSound = new Audio("res/sounds/lose.mp3");
 
+
+
 const ICONS = [
     'apple', 'apricot', 'banana', 'big_win', 'cherry', 'grapes', 'lemon', 'lucky_seven', 'orange', 'pear', 'strawberry', 'watermelon',
 ];
@@ -58,8 +60,20 @@ function setInitialItems() {
  *
  * @param elem The button itself
  */
+
+
 function spin(elem) {
     let duration = BASE_SPINNING_DURATION + randomDuration();
+
+    if (audioEnabled) {
+        // Loop the spin sounds with adjusted speed
+        spinSounds.forEach(sound => {
+            sound.loop = true;
+            sound.playbackRate = 10; // Adjust the playback rate (1.0 is normal speed)
+            sound.play();
+        });
+    }
+    
 
     for (let col of cols) { 
         duration += COLUMN_SPINNING_DURATION + randomDuration();
@@ -73,13 +87,22 @@ function spin(elem) {
     window.setTimeout(setResult, BASE_SPINNING_DURATION * 1000 / 2);
 
     window.setTimeout(function () {
+        if (audioEnabled) {
+            // Stop the spin sounds once the spinning is done
+            spinSounds.forEach(sound => sound.pause());
+        }
         document.getElementById('container').classList.remove('spinning');
         elem.removeAttribute('disabled');
     }.bind(elem), duration * 1000);
 }
 
+
+
 function setResult() {
-    for (let col of cols) {
+    let middleResults = [];
+
+    for (let i = 0; i < cols.length; i++) {
+        let col = cols[i];
 
         let results = [
             getRandomIcon(),
@@ -87,13 +110,28 @@ function setResult() {
             getRandomIcon()
         ];
 
+        middleResults.push(results[1]); // Collect the middle icon
+
         let icons = col.querySelectorAll('.icon img');
         for (let x = 0; x < 3; x++) {
             icons[x].setAttribute('src', 'res/items/' + results[x] + '.png');
             icons[(icons.length - 3) + x].setAttribute('src', 'res/items/' + results[x] + '.png');
         }
+
+        if (audioEnabled) {
+            setTimeout(() => {
+                coinSounds[i].play();
+            }, 2000); // 
+        }
+        
     }
+
+    // Print the middle indexes in one line after all columns have been processed
+    console.log("Result:", middleResults.join(", "));
 }
+
+
+
 
 function getRandomIcon() {
     return ICONS[Math.floor(Math.random() * ICONS.length)];
