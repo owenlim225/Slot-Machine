@@ -1,3 +1,12 @@
+var isSpinning = false;
+var audioEnabled = false;
+let statusElement = document.getElementById("status");
+
+// Load sounds
+var spinSounds = Array(7).fill().map(() => new Audio("res/sounds/spin.mp3"));
+var coinSounds = Array(3).fill().map(() => new Audio("res/sounds/coin.mp3"));
+var winSound = new Audio("res/sounds/win.mp3");
+var loseSound = new Audio("res/sounds/lose.mp3");
 
 const ICONS = [
     'apple', 'apricot', 'banana', 'big_win', 'cherry', 'grapes', 'lemon', 'lucky_seven', 'orange', 'pear', 'strawberry', 'watermelon',
@@ -35,7 +44,7 @@ function setInitialItems() {
 
         for (let x = 0; x < amountOfItems; x++) {
             let icon = getRandomIcon();
-            let item = '<div class="icon" data-item="' + icon + '"><img src="items/' + icon + '.png"></div>';
+            let item = '<div class="icon" data-item="' + icon + '"><img src="res/items/' + icon + '.png"></div>';
             elms += item;
 
             if (x < 3) firstThreeElms += item;
@@ -80,8 +89,8 @@ function setResult() {
 
         let icons = col.querySelectorAll('.icon img');
         for (let x = 0; x < 3; x++) {
-            icons[x].setAttribute('src', 'items/' + results[x] + '.png');
-            icons[(icons.length - 3) + x].setAttribute('src', 'items/' + results[x] + '.png');
+            icons[x].setAttribute('src', 'res/items/' + results[x] + '.png');
+            icons[(icons.length - 3) + x].setAttribute('src', 'res/items/' + results[x] + '.png');
         }
     }
 }
@@ -95,4 +104,21 @@ function getRandomIcon() {
  */
 function randomDuration() {
     return Math.floor(Math.random() * 10) / 100;
+}
+
+
+function toggleAudio() {
+    audioEnabled = !audioEnabled;
+    let volume = audioEnabled ? 0.5 : 0;
+
+    spinSounds.forEach(sound => sound.volume = volume);
+    coinSounds.forEach(sound => sound.volume = volume);
+    winSound.volume = audioEnabled ? 1.0 : 0;
+    loseSound.volume = audioEnabled ? 1.0 : 0;
+
+    document.getElementById("audio").src = `res/icons/audio${audioEnabled ? "On" : "Off"}.png`;
+}
+
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }

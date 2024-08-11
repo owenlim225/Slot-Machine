@@ -27,7 +27,10 @@
         </div>
     </div>
 
-    <input type="button" onclick="spin(this)" class="start-button" value="Spin"/>
+    <input type="button" id="startButton" onclick="spin(this)" class="start-button" value="Spin"/>
+    <div id="options">
+        <img src="res/icons/audioOn.png" id="audio" class="option" onclick="toggleAudio()" />
+    </div>
 </div>
 
 </body>

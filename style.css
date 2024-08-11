@@ -168,3 +168,26 @@ body {
         transform: rotate(7deg);
     }
 }*/
+
+
+#startButton{
+	margin-top: 25px;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	border-radius: 5px;
+	text-align: center;
+	background-color: #AB47BC;
+	color: #FFFFFF;
+	font-size: 25px;
+}
+#startButton:hover{
+	background-color: #BA68C8;
+}
+
+#options{
+    margin-top: 20px;
+    padding-top: 5px;
+    border-radius: 5px;
+    background-color: #C62828;
+    color: #FFFFFF;
+}
